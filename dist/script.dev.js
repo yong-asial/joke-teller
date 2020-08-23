@@ -87,6 +87,10 @@ var VoiceRSS = {
 
     throw "The browser does not support HTTP request";
   }
+}; // Disabled/Enabled Button
+
+var toggleButton = function toggleButton() {
+  button.disabled = !button.disabled;
 };
 
 var speak = function speak(joke) {
@@ -144,22 +148,24 @@ var getJokes = function getJokes() {
           }
 
           if (combinedJoke) speak(combinedJoke);
-          _context.next = 20;
+          toggleButton();
+          _context.next = 21;
           break;
 
-        case 17:
-          _context.prev = 17;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](1);
           console.error(_context.t0);
 
-        case 20:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[1, 17]]);
+  }, null, null, [[1, 18]]);
 };
 
-button.addEventListener('click', getJokes); // On Load
+button.addEventListener('click', getJokes);
+audioElement.addEventListener('ended', toggleButton); // On Load
 
 audioElement.hidden = true;
